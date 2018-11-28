@@ -1,6 +1,6 @@
 import datetime
-from multiprocessing import Process
 import CoroCron
+import asyncio
 
 class Job():
     def __init__(self, cron = None):
@@ -24,7 +24,7 @@ class Job():
         self.__hours = None
         self.__minutes = None
 
-        self.__target = None
+        self.__function = None
         self.__args = None
         
 
@@ -72,10 +72,12 @@ class Job():
         self.__minutes = minutes
         return self
 
-    def Do(self, target, args=None):
+    def Do(self, function, args=()):
         if not self.__set:
             ValueError("Must have at least 1 period (month, day, hour, etc.) set first")
-        self.__target = target
+        if not asyncio.iscoroutinefunction(function):
+            TypeError("Function must be a coroutine")
+        self.__function = function
         self.__args = args
         if self.cron is not None:
             self.cron.AddJob(self)
@@ -132,15 +134,9 @@ class Job():
         
         return True
     
-    def Execute(self):
-        
+    async def Execute(self):
         try:
-            if self.__args is None:
-                p = Process(target=self.__target)
-            else:
-                p = Process(target=self.__target, args=self.__args)
-            p.daemon = True
-            p.start()
+            await self.__function(*self.__args)
         except Exception as ex:
             print(ex)
         

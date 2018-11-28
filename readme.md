@@ -1,6 +1,6 @@
 # CoroCron
 
-CoroCron is a cron like scheduler for python functions.  It uses asyncio to asynchronously start jobs at the specified schedule.  The jobs are run using multiprocessing so that they will not interupt the main process.
+CoroCron is a cron like scheduler for python functions.  It uses asyncio to asynchronously start jobs at the specified schedule.  The jobs are then put on the event loop when the schedule specified is met.
 
 ## Usage
 
@@ -38,9 +38,10 @@ Cron.Job().Days().Hours().Minutes().Do(function, args)
         * Monday = 0, Sunday = 6.  An enum is also provided: `CoroCron.Weekdays`
     * `Hours()` - Hours of the day
     * `Minutes()` - Minutes in the hour
-* `Do(function, args)`
-    * Do is basically a proxy for a `multiprocessing.Process` It stores the action to complete at the scheule specified by the periods above
-    * args is optional
+* `Do(function, args=())`
+    * This is the coroutine that you want to execute when the time is right
+    * The function should be passed by reference (i.e. without parenthesis at the end)
+    * You can pass args as a tuple in the 2nd parameter
 
 ### Step 3: Start the Cron
 

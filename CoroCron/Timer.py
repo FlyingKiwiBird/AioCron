@@ -1,6 +1,5 @@
 import asyncio
 import datetime
-from queue import Empty
 import CoroCron
 
 
@@ -18,13 +17,9 @@ class Timer():
                     now = datetime.datetime.utcnow()
                 else:
                     now = datetime.datetime.now()
-                
                 for job in self.jobs:
                     if job.Test(now):
-                        try:
-                            job.Execute()
-                        except Exception:
-                            pass
+                        asyncio.create_task(job.Execute())
                 await self.__wait()
             except KeyboardInterrupt:
                 break
