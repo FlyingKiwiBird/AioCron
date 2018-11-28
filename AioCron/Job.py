@@ -94,10 +94,7 @@ class Job():
             if self.__months is not None:
                 if dt.month not in self.__months:
                     return False
-        elif not first_period:
-            if dt.month != 1:
-                return False
-        
+              
         #Days
         if self.__daily:
             first_period = False
