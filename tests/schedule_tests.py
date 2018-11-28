@@ -25,7 +25,7 @@ class ScheduleTests(unittest.TestCase):
 
     def test_weekly(self):
         p = CoroCron.Cron()
-        j = p.Job().Weekdays((0,)) #Monday
+        j = p.Job().Weekdays(0) #Monday
         dt1 = datetime.datetime(2018, 11, 13, 0) #Tuesday
         self.assertFalse(j.Test(dt1))
         dt2 = datetime.datetime(2018, 11, 12, 0) #Monday

@@ -1,6 +1,7 @@
 import datetime
 import CoroCron
 import asyncio
+from collections import Iterable
 
 class Job():
     def __init__(self, cron = None):
@@ -30,10 +31,10 @@ class Job():
 
     def Months(self, months = None):
         if self.__monthly:
-            ValueError("Can only have 1 Months schedule set")
+            ValueError("Can only have 1 Months schedule set")     
         self.__monthly = True
         self.__set = True
-        self.__months = months
+        self.__months = self.__ensure_iterable(months)
         return self
 
     def Days(self, days = None):
@@ -43,7 +44,7 @@ class Job():
             ValueError("Can only have 1 Days schedule set")
         self.__daily = True
         self.__set = True
-        self.__days = days
+        self.__days = self.__ensure_iterable(days)
         return self
 
     def Weekdays(self, days_of_week=None):
@@ -53,7 +54,7 @@ class Job():
             ValueError("Can only have 1 Weekdays schedule set")
         self.__weekly = True
         self.__set = True
-        self.__weekdays = days_of_week
+        self.__weekdays = self.__ensure_iterable(days_of_week)
         return self
 
     def Hours(self, hours=None):
@@ -61,7 +62,7 @@ class Job():
             ValueError("Can only have 1 Hours schedule set")
         self.__hourly = True
         self.__set = True
-        self.__hours = hours
+        self.__hours = self.__ensure_iterable(hours)
         return self
 
     def Minutes(self, minutes=None):
@@ -69,7 +70,7 @@ class Job():
             ValueError("Can only have 1 Minuets schedule set")
         self.__minutely = True
         self.__set = True
-        self.__minutes = minutes
+        self.__minutes = self.__ensure_iterable(minutes)
         return self
 
     def Do(self, function, args=()):
@@ -133,6 +134,13 @@ class Job():
                 return False
         
         return True
+
+    def __ensure_iterable(self, value):
+        if value is None:
+            return None
+        if isinstance(value, Iterable):
+            return value
+        return (value,)
     
     async def Execute(self):
         try:

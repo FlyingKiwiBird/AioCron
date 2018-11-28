@@ -23,7 +23,7 @@ Cron.Job().Days().Hours().Minutes().Do(function, args)
     *  Like * in cron
     * e.g. `.Days()` would run every day in a given month
 * Otherwise a list can be specified for which days
-    * A tuple (or any iterable) can also be used
+    * Any iterable or single numeric (`.Days(4)`) can also be used.
     * e.g. `.Hours([0,2,4])` would run at 12am, 2am, and 4am
 * Any period *after* the initial setting will default to the first if not specified
     * For days: 1st day of the month
