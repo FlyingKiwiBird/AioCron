@@ -1,13 +1,13 @@
 import datetime
 from multiprocessing import Process
-import AioCron
+import CoroCron
 
 class Job():
     def __init__(self, cron = None):
         self.cron = None
         if cron is not None:
-            if not isinstance(cron, AioCron.Cron):
-                TypeError("cron must be a AioCron.Cron object")
+            if not isinstance(cron, CoroCron.Cron):
+                TypeError("cron must be a CoroCron.Cron object")
             self.cron = cron
 
         self.__set = False

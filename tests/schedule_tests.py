@@ -1,10 +1,10 @@
 import unittest
-import AioCron
+import CoroCron
 import datetime
 
 class ScheduleTests(unittest.TestCase):
     def test_monthly(self):
-        p = AioCron.Cron()
+        p = CoroCron.Cron()
         j = p.Job().Months((2,))
         dt1 = datetime.datetime(2018, 1, 1)
         self.assertFalse(j.Test(dt1))
@@ -14,7 +14,7 @@ class ScheduleTests(unittest.TestCase):
         self.assertFalse(j.Test(dt3))
 
     def test_daily(self):
-        p = AioCron.Cron()
+        p = CoroCron.Cron()
         j = p.Job().Days((2,))
         dt1 = datetime.datetime(2018, 6, 1, 0)
         self.assertFalse(j.Test(dt1))
@@ -24,7 +24,7 @@ class ScheduleTests(unittest.TestCase):
         self.assertFalse(j.Test(dt3))
 
     def test_weekly(self):
-        p = AioCron.Cron()
+        p = CoroCron.Cron()
         j = p.Job().Weekdays((0,)) #Monday
         dt1 = datetime.datetime(2018, 11, 13, 0) #Tuesday
         self.assertFalse(j.Test(dt1))
@@ -34,7 +34,7 @@ class ScheduleTests(unittest.TestCase):
         self.assertFalse(j.Test(dt3))
 
     def test_hourly(self):
-        p = AioCron.Cron()
+        p = CoroCron.Cron()
         j = p.Job().Hours((10,))
         dt1 = datetime.datetime(2018, 6, 1, 0, 0)
         self.assertFalse(j.Test(dt1))
@@ -44,7 +44,7 @@ class ScheduleTests(unittest.TestCase):
         self.assertFalse(j.Test(dt3))
 
     def test_minutely(self):
-        p = AioCron.Cron()
+        p = CoroCron.Cron()
         j = p.Job().Minutes((58,))
         dt1 = datetime.datetime(2018, 6, 1, 10, 0, 0)
         self.assertFalse(j.Test(dt1))
@@ -53,7 +53,7 @@ class ScheduleTests(unittest.TestCase):
         #Note: because the checker runs once a minute we don't need the 3rd test here
 
     def test_monthly_daily(self):
-        p = AioCron.Cron()
+        p = CoroCron.Cron()
         j = p.Job().Months((6,)).Days((4,))
         dt1 = datetime.datetime(2018, 5, 1, 0, 0)
         self.assertFalse(j.Test(dt1))
@@ -67,7 +67,7 @@ class ScheduleTests(unittest.TestCase):
         self.assertTrue(j.Test(dt5))
 
     def test_monthly_hourly(self):
-        p = AioCron.Cron()
+        p = CoroCron.Cron()
         j = p.Job().Months((6,)).Hours((4,))
         dt1 = datetime.datetime(2018, 6, 2, 4, 0)
         self.assertFalse(j.Test(dt1))
@@ -75,7 +75,7 @@ class ScheduleTests(unittest.TestCase):
         self.assertTrue(j.Test(dt2))
 
     def test_m_d_h(self):
-        p = AioCron.Cron()
+        p = CoroCron.Cron()
         j = p.Job().Months((6,)).Days().Hours((4,))
         dt1 = datetime.datetime(2018, 6, 2, 4, 0)
         self.assertTrue(j.Test(dt1))

@@ -1,7 +1,7 @@
 import asyncio
 import datetime
 from queue import Empty
-import AioCron
+import CoroCron
 
 
 class Timer():
@@ -30,7 +30,7 @@ class Timer():
                 break
 
     def AddJob(self, job):
-        if isinstance(job, AioCron.Job):
+        if isinstance(job, CoroCron.Job):
             self.jobs.append(job)
 
     async def __wait(self):

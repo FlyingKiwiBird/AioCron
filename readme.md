@@ -1,6 +1,6 @@
-# AioCron
+# CoroCron
 
-AioCron is a cron like scheduler for python functions.  It uses asyncio to asynchronously start jobs at the specified schedule.  The jobs are run using multiprocessing so that they will not interupt the main process.
+CoroCron is a cron like scheduler for python functions.  It uses asyncio to asynchronously start jobs at the specified schedule.  The jobs are run using multiprocessing so that they will not interupt the main process.
 
 ## Usage
 
@@ -8,10 +8,10 @@ You can find more usage examples in the examples directory
 
 ### Step 1: Create the base cron object
 ```python
-import AioCron
-Cron = AioCron.Cron()
+import CoroCron
+Cron = CoroCron.Cron()
 ```
-Note: By default Cron uses the local timezone but it can be modified to use UTC by initializing like so: ```AioCron.Cron(True)```
+Note: By default Cron uses the local timezone but it can be modified to use UTC by initializing like so: ```CoroCron.Cron(True)```
 
 ### Step 2: Add jobs
 ```python
@@ -35,7 +35,7 @@ Cron.Job().Days().Hours().Minutes().Do(function, args)
     * `Months()` - Months of the year
     * `Days()` - Days of the month
     * `Weekdays()` - Days of the week (note: you can either specify days XOR weekdays, not both)
-        * Monday = 0, Sunday = 6.  An enum is also provided: `AioCron.Weekdays`
+        * Monday = 0, Sunday = 6.  An enum is also provided: `CoroCron.Weekdays`
     * `Hours()` - Hours of the day
     * `Minutes()` - Minutes in the hour
 * `Do(function, args)`

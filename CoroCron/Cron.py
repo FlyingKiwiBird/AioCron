@@ -1,10 +1,10 @@
 import datetime
-import AioCron
+import CoroCron
 import asyncio
 
 class Cron():
     def __init__(self, use_utc=False):
-        self.timer  = AioCron.Timer(use_utc)
+        self.timer  = CoroCron.Timer(use_utc)
         self.__started = False
         
     def Start(self, blocking = False):
@@ -16,11 +16,11 @@ class Cron():
             return self.timer.start()
 
     def AddJob(self, job):
-        if not isinstance(job, AioCron.Job):
-            TypeError("job must be a AioCron job")
+        if not isinstance(job, CoroCron.Job):
+            TypeError("job must be a CoroCron job")
         self.timer.AddJob(job)
 
     def Job(self):
-        return AioCron.Job(self)
+        return CoroCron.Job(self)
 
     

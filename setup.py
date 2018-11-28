@@ -1,5 +1,5 @@
 import io
-import AioCron
+import CoroCron
 from setuptools import setup, find_packages
 
 try:
@@ -9,15 +9,15 @@ except:
     readme = ""
 
 setup(
-    name = "AioCron",
-    version = AioCron.__version__,
+    name = "CoroCron",
+    version = CoroCron.__version__,
     author = "Flying Kiwi",
     author_email = "github@flyingkiwibird.com",
     description = ("A pythonic cron using asyncio"),
     license = "MIT",
     keywords = "Cron asyncio schedule",
     url = "https://github.com/FlyingKiwiBird/EsiPysi",
-    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", "examples", "examples.*"]),
     install_requires=[],
     long_description=readme,
     classifiers=[
