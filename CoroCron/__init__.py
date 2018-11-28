@@ -7,4 +7,4 @@ except ImportError:
     pass
 
 __name__ = 'CoroCron'
-__version__ = '0.1.3'
+__version__ = '0.1.4'

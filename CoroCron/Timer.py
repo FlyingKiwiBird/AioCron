@@ -19,7 +19,7 @@ class Timer():
                     now = datetime.datetime.now()
                 for job in self.jobs:
                     if job.Test(now):
-                        asyncio.create_task(job.Execute())
+                        asyncio.ensure_future(job.Execute())
                 await self.__wait()
             except KeyboardInterrupt:
                 break
