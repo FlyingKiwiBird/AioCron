@@ -16,9 +16,10 @@ setup(
     description = ("A pythonic cron using asyncio"),
     license = "MIT",
     keywords = "Cron asyncio schedule",
-    url = "https://github.com/FlyingKiwiBird/EsiPysi",
+    url = "https://github.com/FlyingKiwiBird/AioCron",
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", "examples", "examples.*"]),
     install_requires=[],
+    long_description_content_type='text/markdown',
     long_description=readme,
     classifiers=[
         "Development Status :: 3 - Alpha",
